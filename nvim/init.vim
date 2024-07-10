@@ -7,6 +7,8 @@ call plug#begin()
     Plug 'scrooloose/nerdtree'
     Plug 'vim-airline/vim-airline'
     Plug 'easymotion/vim-easymotion'
+    Plug '~/.fzf'
+    Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set expandtab
@@ -20,6 +22,8 @@ set mouse=v
 
 colorscheme catppuccin_frappe
 
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
 
 nnoremap <C-n> :NERDTreeToggle <Enter>
 nnoremap <C-f> :NERDTreeFocus <Enter>
