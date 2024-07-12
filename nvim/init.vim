@@ -1,4 +1,4 @@
-" VIM-PLUG
+" VM-PLUG
 call plug#begin()
     Plug 'dracula/vim'
     Plug 'xiyaowong/transparent.nvim'
@@ -13,8 +13,32 @@ call plug#begin()
     Plug 'gelguy/wilder.nvim'
     Plug 'roxma/nvim-yarp',  { 'do': 'pip install -r requirements.txt' }
     Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'mrcjkb/rustaceanvim'
 call plug#end()
 
+" MASON/LSP CONFIG
+
+lua <<EOF
+require("mason").setup()
+require("mason-lspconfig").setup() 
+require("lspconfig").lua_ls.setup({})
+require("lspconfig").rust_analyzer.setup({
+    on_attach = function(client, bufnr)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end,
+    ["rust-analyzer"] = {
+        checkOnSave = {
+            command = "clippy",
+        },
+    },
+})
+
+EOF
+
+"
 " WILDER CONFIG
 autocmd CmdlineEnter * ++once call s:wilder_init() | call wilder#main#start()
 
@@ -68,6 +92,7 @@ set clipboard+=unnamedplus
 
 colorscheme catppuccin_frappe
 
+let g:vimsyn_embed='lPr'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter='unique_tail'
 
