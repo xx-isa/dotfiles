@@ -63,6 +63,7 @@ set number
 set cc=80,100,120
 set ignorecase
 set mouse=v
+set mouse=a
 set clipboard+=unnamedplus
 
 colorscheme catppuccin_frappe
