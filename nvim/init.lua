@@ -33,6 +33,8 @@ call plug#begin()
     Plug 'm4xshen/autoclose.nvim'
     Plug 'goolord/alpha-nvim'
     Plug 'chrisbra/unicode.vim'
+    Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
+    Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
 ]])
 
@@ -65,18 +67,42 @@ require("alpha").setup(dash_config.config)
 -- MASON/LSPCONFIG
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+local keymap= vim.keymap
+local opts= {noremap = true, silent= true}
+
+local fzf_lua = require("fzf-lua")
+local on_attach = function (client, bufnr)
+    opts.buffer = bufnr
+
+    opts.desc = "Show code actions"
+    keymap.set({"n", "v"}, "<leader>ca", fzf_lua.lsp_code_actions, opts)
+    opts.desc = "List locations"
+    keymap.set("n", "gA", fzf_lua.lsp_finder, opts)
+    opts.desc = "Show line diagnostics"
+    keymap.set("n", "<leader>d", vim.diagnostic.open_float , opts)
+    opts.desc = "Go to previous diagnostic"
+    keymap.set("n", "[d", vim.diagnostic.goto_prev , opts)
+    opts.desc = "Go to next diagnostic"
+    keymap.set("n", "]d", vim.diagnostic.goto_next , opts)
+    opts.desc = "Smart rename"
+    keymap.set("n", "<leader>rn", vim.lsp.buf.rename , opts)
+    opts.desc = "Show signature help"
+    keymap.set( "n", "<leader>gh", vim.lsp.buf.signature_help, opts)
+end
+
 require("mason").setup()
 require("mason-lspconfig").setup()
 
 require("lspconfig").lua_ls.setup({
     settings = {Lua = {diagnostics = {globals = { 'vim' }},},},
     capabilities = capabilities,
-    on_attach = function ()
-        vim.keymap.set({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, {noremap = true, silent = true})
-    end
+    on_attach = on_attach
 })
 
-require("lspconfig").pylsp.setup({})
+require("lspconfig").pyright.setup({
+    capabilities = capabilities,
+    on_attach = on_attach
+})
 
 -- COMPLETIONS
 local cmp = require("cmp")
@@ -166,6 +192,7 @@ o.clipboard=o.clipboard + "unnamedplus"
 o.encoding="utf-8"
 o.foldmethod="indent"
 o.foldtext=""
+o.termguicolors=true
 
 vim.g.airline= {
     extensions = {
@@ -189,9 +216,9 @@ colorscheme catppuccin_frappe
  " KEYBINDINGS
 nnoremap <C-n> :NERDTreeToggle <Enter>
 nnoremap <C-f> :NERDTreeFocus <Enter>
-nnoremap <Leader>o :Files <Enter> 
+nnoremap <Leader>o :FzfLua files <Enter> 
 nnoremap <Leader>f :Files 
-nnoremap <Leader>b :Buffers <Enter>
+nnoremap <Leader>b :FzfLua buffers <Enter>
 nnoremap <Leader><C-l> :let @/ = "" <Enter>
 
 ]])
