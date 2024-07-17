@@ -1,6 +1,7 @@
 
 vim.cmd([[
 call plug#begin()
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'dracula/vim', { 'as': 'dracula-vim'}
     Plug 'xiyaowong/transparent.nvim'
     Plug 'EdenEast/nightfox.nvim'
@@ -81,14 +82,19 @@ local on_attach = function (client, bufnr)
     keymap.set("n", "gA", fzf_lua.lsp_finder, opts)
     opts.desc = "Show line diagnostics"
     keymap.set("n", "<leader>d", vim.diagnostic.open_float , opts)
-    opts.desc = "Go to previous diagnostic"
-    keymap.set("n", "[d", vim.diagnostic.goto_prev , opts)
-    opts.desc = "Go to next diagnostic"
-    keymap.set("n", "]d", vim.diagnostic.goto_next , opts)
     opts.desc = "Smart rename"
     keymap.set("n", "<leader>rn", vim.lsp.buf.rename , opts)
     opts.desc = "Show signature help"
     keymap.set( "n", "<leader>gh", vim.lsp.buf.signature_help, opts)
+    opts.desc = "Show document symbols"
+    keymap.set( "n", "<leader>s", fzf_lua.lsp_document_symbols, opts)
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        callback = function ()
+            vim.lsp.buf.hover()
+        end,
+    })
 end
 
 require("mason").setup()
@@ -198,10 +204,19 @@ o.mouse='v'
 o.mouse='a'
 o.clipboard=o.clipboard + "unnamedplus"
 o.encoding="utf-8"
-o.foldmethod="indent"
-o.foldtext=""
 o.termguicolors=true
 
+vim.cmd([[colorscheme catppuccin_frappe]])
+
+o.foldmethod="expr"
+o.foldexpr="v:lua.vim.treesitter.foldexpr()"
+o.foldtext=""
+o.foldlevelstart=99
+o.foldcolumn='1'
+vim.cmd([[ highlight FoldColumn guibg=None ]])
+vim.cmd([[ highlight NormalFloat guibg=#414559 ]])
+
+o.statuscolumn="%C %l %s "
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "help",
@@ -211,7 +226,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.cmd([[
-colorscheme catppuccin_frappe
 
 let g:airline#extensions#tabline#enabled=1 
 let g:airline#extensions#tabline#formatter= 'unique_tail'
