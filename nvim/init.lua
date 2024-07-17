@@ -35,6 +35,7 @@ call plug#begin()
     Plug 'chrisbra/unicode.vim'
     Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
     Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'edkolev/tmuxline.vim'
 call plug#end()
 ]])
 
@@ -104,6 +105,13 @@ require("lspconfig").pyright.setup({
     on_attach = on_attach
 })
 
+vim.g.rustaceanvim = {
+    tools = {
+        float_win_config = {
+            border = 'rounded'
+        }
+    }
+}
 -- COMPLETIONS
 local cmp = require("cmp")
 cmp.setup({
@@ -194,14 +202,6 @@ o.foldmethod="indent"
 o.foldtext=""
 o.termguicolors=true
 
-vim.g.airline= {
-    extensions = {
-        tabline = {
-            enable=1,
-            formatter='unique_tail',
-        },
-    },
-}
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "help",
@@ -213,11 +213,14 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.cmd([[
 colorscheme catppuccin_frappe
 
+let g:airline#extensions#tabline#enabled=1 
+let g:airline#extensions#tabline#formatter= 'unique_tail'
+
  " KEYBINDINGS
 nnoremap <C-n> :NERDTreeToggle <Enter>
 nnoremap <C-f> :NERDTreeFocus <Enter>
 nnoremap <Leader>o :FzfLua files <Enter> 
-nnoremap <Leader>f :Files 
+nnoremap <Leader>f :FzfLua files 
 nnoremap <Leader>b :FzfLua buffers <Enter>
 nnoremap <Leader><C-l> :let @/ = "" <Enter>
 
