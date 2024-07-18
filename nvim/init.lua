@@ -63,7 +63,7 @@ dash_config.section.header.val = {
     [[                  ✧ .⠀⧫⠀✧⠙⠿⣿⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋✢⠀⭓ﾟ                         ]],
     [[                    ⠀⠀⠀⭑⠀⠀⠀⠀⠈⠉⠙⠛⠛⠛⠛⠛⠛⠛⠛⠋⠉⠁⠀⠀ﾟ⠀  ✶                          ]],
 }
-table.insert(dash_config.section.buttons.val, 1, dash_config.button( "c", "  Config", ":edit ~/Downloads/dotfiles/nvim/init.lua <Enter>" ))
+table.insert(dash_config.section.buttons.val, 1, dash_config.button( "c", "  Config", ":edit ~/.config/nvim/init.lua <Enter>" ))
 require("alpha").setup(dash_config.config)
 
 -- MASON/LSPCONFIG
@@ -229,7 +229,7 @@ vim.cmd([[
 
 let g:airline#extensions#tabline#enabled=1 
 let g:airline#extensions#tabline#formatter= 'unique_tail'
-
+let g:tmuxline_separators = { 'left': '', 'left_alt': '', 'right': '', 'right_alt': ''}
  " KEYBINDINGS
 nnoremap <C-n> :NERDTreeToggle <Enter>
 nnoremap <C-f> :NERDTreeFocus <Enter>
