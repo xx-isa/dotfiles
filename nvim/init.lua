@@ -3,9 +3,8 @@ vim.cmd([[
 call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'dracula/vim', { 'as': 'dracula-vim'}
-    Plug 'xiyaowong/transparent.nvim'
     Plug 'EdenEast/nightfox.nvim'
-    Plug 'catppuccin/vim', { 'as': 'catpuccin' }
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'ryanoasis/vim-devicons'
     Plug 'scrooloose/nerdtree'
     Plug 'vim-airline/vim-airline'
@@ -37,11 +36,23 @@ call plug#begin()
     Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'edkolev/tmuxline.vim'
+    Plug 'stevearc/dressing.nvim'
 call plug#end()
 ]])
 
 -- PLUGINS SETUP
-
+require("catppuccin").setup({
+    flavour="frappe",
+    transparent_background=true,
+    custom_highlights=function (colors)
+       return {
+           NormalFloat={ bg=colors.surface0},
+           FloatBorder={ bg=colors.surface0},
+           CursorLine={ bg=colors.surface0},
+           Pmenu={ bg=colors.surface0},
+       }
+    end
+})
 require("ibl").setup()
 require("autoclose").setup()
 -- START SCREEN
@@ -67,6 +78,13 @@ table.insert(dash_config.section.buttons.val, 1, dash_config.button( "c", "  
 require("alpha").setup(dash_config.config)
 
 -- MASON/LSPCONFIG
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        update_in_insert = true
+    }
+)
+
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local keymap= vim.keymap
@@ -147,7 +165,7 @@ cmp.setup({
     )
 })
 
--- WILDER CONFIG 
+-- WILDER CONFIG
 
 local wilder = require("wilder")
 
@@ -205,8 +223,8 @@ o.mouse='a'
 o.clipboard=o.clipboard + "unnamedplus"
 o.encoding="utf-8"
 o.termguicolors=true
-
-vim.cmd([[colorscheme catppuccin_frappe]])
+vim.cmd([[colorscheme catppuccin]])
+o.signcolumn="yes:1"
 
 o.foldmethod="expr"
 o.foldexpr="v:lua.vim.treesitter.foldexpr()"
@@ -214,27 +232,47 @@ o.foldtext=""
 o.foldlevelstart=99
 o.foldcolumn='1'
 vim.cmd([[ highlight FoldColumn guibg=None ]])
-vim.cmd([[ highlight NormalFloat guibg=#414559 ]])
+-- vim.cmd([[ highlight NormalFloat guibg=#414559 ]])
 
-o.statuscolumn="%C %l %s "
+o.statuscolumn="%C %l %s"
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "help",
     callback = function ()
+        o.cc={}
         vim.cmd([[ wincmd L ]])
+    end
+})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function ()
+        vim.treesitter.start()
     end
 })
 
 vim.cmd([[
+    let g:NERDTreeWinSize=38
+    let g:NERDTreeWinPos='right'
+]])
 
-let g:airline#extensions#tabline#enabled=1 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "nerdtree",
+    callback = function ()
+        o.cc={}
+        o.statuscolumn=""
+    end
+})
+
+vim.cmd([[
+let g:airline_theme='catppuccin'
+let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter= 'unique_tail'
-let g:tmuxline_separators = { 'left': '', 'left_alt': '', 'right': '', 'right_alt': ''}
+let g:tmuxline_separators = { 'left': '', 'left_alt': '', 'right': '', 'right_alt': ''}
  " KEYBINDINGS
 nnoremap <C-n> :NERDTreeToggle <Enter>
 nnoremap <C-f> :NERDTreeFocus <Enter>
-nnoremap <Leader>o :FzfLua files <Enter> 
-nnoremap <Leader>f :FzfLua files 
+nnoremap <Leader>o :FzfLua files <Enter>
+nnoremap <Leader>f :FzfLua files cwd=
 nnoremap <Leader>b :FzfLua buffers <Enter>
 nnoremap <Leader><C-l> :let @/ = "" <Enter>
 
