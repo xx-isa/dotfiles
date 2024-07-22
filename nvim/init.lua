@@ -1,5 +1,4 @@
 require("config.lazy")
-
 vim.cmd.colorscheme("catppuccin")
 
 local o = vim.opt
@@ -19,3 +18,15 @@ o.termguicolors=true
 o.signcolumn="yes:1"
 o.statuscolumn="%C %l %s"
 
+o.foldmethod="expr"
+o.foldexpr="v:lua.vim.treesitter.foldexpr()"
+o.foldtext=""
+o.foldlevelstart=99
+o.foldcolumn='1'
+vim.cmd([[ highlight FoldColumn guibg=None ]])
+
+vim.cmd.highlight("DiagnosticUnderlineWarn gui=undercurl")
+vim.cmd.highlight("DiagnosticUnderlineError gui=undercurl")
+vim.cmd.highlight("DiagnosticUnderlineInfo gui=undercurl")
+vim.cmd.highlight("DiagnosticUnderlineOk gui=underdashed")
+vim.cmd.highlight("DiagnosticUnderlineHint gui=underdashed")
