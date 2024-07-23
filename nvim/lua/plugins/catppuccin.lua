@@ -1,4 +1,4 @@
-opts = {
+local opts = {
     flavour="frappe",
     transparent_background=true,
     custom_highlights=function (colors)

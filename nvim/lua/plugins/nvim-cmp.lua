@@ -7,6 +7,14 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "onsails/lspkind.nvim",
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        {
+            'hrsh7th/cmp-vsnip',
+            dependencies = {
+                'hrsh7th/vim-vsnip',
+                dependencies = {"rafamadriz/friendly-snippets"}
+            }
+        }
     },
     config = function()
         local cmp = require("cmp")
@@ -14,7 +22,8 @@ return {
         cmp.setup {
             snippet = {
                 expand = function(args)
-                    vim.snippet.expand(args.body)
+                    vim.fn["vsnip#anonymous"](args.body)
+                    --require("luasnip").lsp_expand(args.body)
                 end
             },
 
@@ -45,7 +54,9 @@ return {
 
             sources = cmp.config.sources(
                 {
+                    {name = "nvim_lsp_signature_help"},
                     {name = "nvim_lsp"},
+                    {name = "vsnip"},
                 },
                 {
                     {name = "buffer"},

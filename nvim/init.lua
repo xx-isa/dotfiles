@@ -1,4 +1,5 @@
 require("config.lazy")
+vim.cmd([[ let g:lightline = { 'colorscheme': 'catppuccin' } ]])
 vim.cmd.colorscheme("catppuccin")
 
 local o = vim.opt
