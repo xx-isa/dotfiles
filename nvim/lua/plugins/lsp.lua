@@ -36,13 +36,13 @@ return {
                     opts.buffer = args.buf
 
                     opts.desc = "Show code actions"
-                    keymap.set({"n", "v"}, "<leader>ca", vim.lsp.buf.code_action, opts)
+                    keymap.set({"n", "v"}, "<leader>a", vim.lsp.buf.code_action, opts)
                     opts.desc = "Show line diagnostics"
                     keymap.set("n", "<leader>d", vim.diagnostic.open_float , opts)
                     opts.desc = "Smart rename"
                     keymap.set("n", "<leader>rn", vim.lsp.buf.rename , opts)
                     opts.desc = "Show signature help"
-                    keymap.set( "n", "<leader>gh", vim.lsp.buf.signature_help, opts)
+                    keymap.set( "n", "<leader>h", vim.lsp.buf.signature_help, opts)
                 end
             })
 

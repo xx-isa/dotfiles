@@ -1,4 +1,5 @@
 require("config.lazy")
+
 vim.cmd([[ let g:lightline = { 'colorscheme': 'catppuccin' } ]])
 vim.cmd.colorscheme("catppuccin")
 
@@ -9,6 +10,7 @@ o.tabstop = 4
 o.softtabstop = 4
 o.shiftwidth = 4
 o.number = true
+o.relativenumber = true
 o.cc= { 80, 100, 120 }
 o.ignorecase=true
 o.mouse='v'
@@ -31,3 +33,24 @@ vim.cmd.highlight("DiagnosticUnderlineError gui=undercurl")
 vim.cmd.highlight("DiagnosticUnderlineInfo gui=undercurl")
 vim.cmd.highlight("DiagnosticUnderlineOk gui=underdashed")
 vim.cmd.highlight("DiagnosticUnderlineHint gui=underdashed")
+
+local keymap = vim.keymap
+local opts = {noremap = true, silent= true}
+
+opts.desc = "Clear search results"
+keymap.set(
+    "n",
+    "<leader><C-l>",
+    [[ <Cmd>let @/=""<CR> ]],
+    opts
+)
+
+vim.api.nvim_create_autocmd({"InsertEnter", "InsertLeave"}, {
+    callback = function (ev)
+        if ev.event == "InsertEnter" then
+            o.relativenumber = false
+            return
+        end
+        o.relativenumber = true
+    end
+})
