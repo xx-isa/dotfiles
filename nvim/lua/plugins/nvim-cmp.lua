@@ -6,6 +6,7 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
+        "chrisgrieser/cmp-nerdfont",
         "onsails/lspkind.nvim",
         'hrsh7th/cmp-nvim-lsp-signature-help',
         {
@@ -57,6 +58,7 @@ return {
                     {name = "nvim_lsp_signature_help"},
                     {name = "nvim_lsp"},
                     {name = "vsnip"},
+                    {name = "nerdfont"}
                 },
                 {
                     {name = "buffer"},
