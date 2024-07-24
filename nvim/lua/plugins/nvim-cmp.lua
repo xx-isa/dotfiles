@@ -63,7 +63,7 @@ return {
                 {
                     {name = "buffer"},
                 }
-            )
+            ),
         }
 
         cmp.setup.cmdline({'/', '?'}, {
