@@ -21,6 +21,7 @@ return {
         dashboard.section.buttons.val = {
             dashboard.button( "c", "  Config", "<Cmd>edit ~/.config/nvim/init.lua <CR>" ),
             dashboard.button( "e", "  New File", "<Cmd>ene<CR>"),
+            dashboard.button( "o", "󰉋  Open File", "<Cmd>FzfLua files<CR>"),
         }
         dashboard.section.footer.val = "love u"
         require("alpha").setup(dashboard.config)

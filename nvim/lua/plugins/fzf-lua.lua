@@ -1,8 +1,17 @@
 return {
     "ibhagwan/fzf-lua",
-    dependencies = {"nvim-tree/nvim-web-devicons"},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
-    opts = {
-        --winopts = { row=1, col=0},
-    }
+    config = function()
+        local fzf = require("fzf-lua")
+        fzf.setup({})
+
+        local keymap = vim.keymap
+        local opts = { noremap = true, silent = true }
+
+        opts.desc = "Show files in FZF"
+        keymap.set("n", "<leader>F", fzf.files, opts)
+        opts.desc = "Show references in FZF"
+        keymap.set("n", "<leader>rr", fzf.lsp_references, opts)
+    end,
 }
