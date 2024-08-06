@@ -24,6 +24,7 @@ o.termguicolors = true
 o.signcolumn = "yes:1"
 o.statuscolumn = "%C %l %s"
 -- o.statuscolumn = "%l %s"
+o.showmode = false
 
 o.foldmethod = "expr"
 o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -45,6 +46,8 @@ local opts = { noremap = true, silent = true }
 
 opts.desc = "Clear search results"
 keymap.set("n", "<leader><C-l>", [[ <Cmd>let @/=""<CR> ]], opts)
+opts.desc = "Toggle scrollbind"
+keymap.set("n", "<leader>scb", [[ <Cmd>windo set scrollbind!<CR> ]], opts)
 
 -- TOGGLE RELATIVE LINE NUMBER
 vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
