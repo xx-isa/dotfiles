@@ -25,6 +25,8 @@ o.signcolumn = "yes:1"
 o.statuscolumn = "%C %l %s"
 -- o.statuscolumn = "%l %s"
 o.showmode = false
+o.list = true
+o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 o.foldmethod = "expr"
 o.foldexpr = "v:lua.vim.treesitter.foldexpr()"

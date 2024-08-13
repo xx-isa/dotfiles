@@ -10,24 +10,33 @@ return {
             "nvimtools/none-ls.nvim",
         },
         config = function()
+            local utils = require("utils")
+            local mason_lspconfig = require("mason-lspconfig")
+            local lspconfig = require("lspconfig")
             require("mason").setup()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                },
+            mason_lspconfig.setup({
+                ensure_installed = utils.lsp_servers,
             })
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            require("lspconfig").lua_ls.setup({
-                settings = {
-                    Lua = { diagnostics = { globals = { "vim" } } },
-                },
-                capabilities = capabilities,
-            })
 
-            require("lspconfig").pyright.setup({
-                capabilities = capabilities,
-            })
+            mason_lspconfig.setup_handlers = {
+                function(server_name)
+                    lspconfig[server_name].setup({
+                        capabilities = capabilities,
+                    })
+                end,
+                ["lua_ls"] = function()
+                    lspconfig.lua_ls.setup({
+                        settings = {
+                            Lua = {
+                                diagnostics = { globals = { "vim" } },
+                            },
+                        },
+                        capabilities = capabilities,
+                        })
+                end,
+            }
 
             local keymap = vim.keymap
             local opts = { noremap = true, silent = true }
