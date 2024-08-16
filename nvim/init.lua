@@ -1,8 +1,8 @@
 require("config.lazy")
+local utils = require("utils")
 -- COLORSCHEME
 
-vim.g.lightline = { colorscheme = "catppuccin" }
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme(utils.colorscheme)
 
 -- GENERAL CONFIGS
 local o = vim.opt
@@ -25,8 +25,9 @@ o.signcolumn = "yes:1"
 o.statuscolumn = "%C %l %s"
 -- o.statuscolumn = "%l %s"
 o.showmode = false
+o.splitright = true
 o.list = true
-o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 o.foldmethod = "expr"
 o.foldexpr = "v:lua.vim.treesitter.foldexpr()"

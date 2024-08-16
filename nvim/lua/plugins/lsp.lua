@@ -20,7 +20,7 @@ return {
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            mason_lspconfig.setup_handlers = {
+            mason_lspconfig.setup_handlers({
                 function(server_name)
                     lspconfig[server_name].setup({
                         capabilities = capabilities,
@@ -36,7 +36,7 @@ return {
                         capabilities = capabilities,
                         })
                 end,
-            }
+            })
 
             local keymap = vim.keymap
             local opts = { noremap = true, silent = true }
