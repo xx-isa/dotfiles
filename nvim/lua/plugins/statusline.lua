@@ -6,16 +6,20 @@ return {
     init = function()
         local utils = require("utils")
         vim.g.lightline = {
+            -- %L
             colorscheme = utils.colorscheme,
             active = {
                 left = {
                     { "mode", "paste" }, { "gitbranch" }, { "readonly", "filename" }
                 },
                 right = {
-                    { "lineinfo" },
+                    { "linetotal", "lineinfo" },
                     { "percent" },
                     { "fileencoding", "filetype" },
                 },
+            },
+            component = {
+                linetotal = "%L",
             },
             component_function = {
                 filename = "LightlineFilename",
