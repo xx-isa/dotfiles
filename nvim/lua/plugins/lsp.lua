@@ -36,6 +36,12 @@ return {
                         capabilities = capabilities,
                         })
                 end,
+                ["bashls"] = function ()
+                    lspconfig.bashls.setup({
+                        filetypes = {"sh", "zsh"},
+                        capabilities = capabilities
+                    })
+                end
             })
 
             local keymap = vim.keymap
