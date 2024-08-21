@@ -10,16 +10,18 @@ return {
             colorscheme = utils.colorscheme,
             active = {
                 left = {
-                    { "mode", "paste" }, { "gitbranch" }, { "readonly", "filename" }
+                    { "mode",     "paste" },
+                    { "gitbranch" },
+                    { "readonly", "filename" },
                 },
                 right = {
-                    { "linetotal", "lineinfo" },
+                    { "lineinfo",    "linetotal" },
                     { "percent" },
                     { "fileencoding", "filetype" },
                 },
             },
             component = {
-                linetotal = "%L",
+                linetotal = "󰱴  %L",
             },
             component_function = {
                 filename = "LightlineFilename",
