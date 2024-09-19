@@ -9,11 +9,13 @@ return {
         local keymap = vim.keymap
         local opts = { noremap = true, silent = true }
 
-        opts.desc = "Show files in FZF"
+        opts.desc = "Show files"
         keymap.set("n", "Ff", fzf.files, opts)
-        opts.desc = "Open config file (FZF)"
+        opts.desc = "Show buffers"
+        keymap.set("n", "Fb", fzf.buffers, opts)
+        opts.desc = "Open config file"
         keymap.set("n", "Fc", function() fzf.files({cwd = "~/.config/nvim"}) end, opts)
-        opts.desc = "Live grep project FZF"
+        opts.desc = "Live grep project"
         keymap.set("n", "Fg", fzf.live_grep, opts)
         opts.desc = "Resume FZF"
         keymap.set("n", "Fr", fzf.resume, opts)
