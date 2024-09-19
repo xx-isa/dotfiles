@@ -1,3 +1,8 @@
+[[manager.prepend_keymap]]
+on   = "<C-s>"
+run  = 'shell "$SHELL" --block --confirm'
+desc = "Open shell here"
+
 [[ manager.prepend_keymap ]]
 on="T"
 run="plugin --sync hide-preview"
