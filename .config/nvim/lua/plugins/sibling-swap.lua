@@ -1,5 +1,6 @@
 return {
     "Wansmer/sibling-swap.nvim",
+    event = {"VeryLazy"},
     dependencies = { "nvim-treesitter" },
     opts = {
         keymaps = {
