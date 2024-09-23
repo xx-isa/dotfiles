@@ -1,12 +1,15 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
-    config = function ()
+    config = function()
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
-            ensure_installed = { "python", }
+            ensure_installed = require("utils").ts_parsers ,
+            highlight = {
+                enable = true,
+            },
         })
-    end
+    end,
 }

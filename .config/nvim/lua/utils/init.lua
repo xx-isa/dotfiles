@@ -2,11 +2,20 @@ local M = {}
 
 M.colorscheme = "catppuccin"
 
+-- :h lspconfig-all
 M.lsp_servers = {
-	"pyright",
 	"lua_ls",
-    "dockerls",
-    "bashls",
+	-- "pyright",
+    -- "dockerls",
+    -- "bashls",
+    -- "jdtls",
+    -- "hls",
+}
+
+M.ts_parsers = {
+    "python",
+    "haskell",
+    "java"
 }
 
 return M
