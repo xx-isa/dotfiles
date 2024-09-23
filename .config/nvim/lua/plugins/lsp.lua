@@ -53,6 +53,7 @@ return {
 
                     opts.desc = "Show code actions ~/"
                     keymap.set({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, opts)
+                    keymap.set({ "i" }, "<C-\\>a", vim.lsp.buf.code_action, opts)
                     opts.desc = "Show line diagnostics"
                     keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
                     opts.desc = "Smart rename"
