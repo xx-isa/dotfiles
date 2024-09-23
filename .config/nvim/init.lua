@@ -18,7 +18,6 @@ o.cc = { 80, 100, 120 }
 o.ignorecase = true
 o.mouse = "v"
 o.mouse = "a"
-o.clipboard = o.clipboard + "unnamedplus"
 o.encoding = "utf-8"
 o.termguicolors = true
 o.signcolumn = "yes:1"
@@ -28,6 +27,10 @@ o.showmode = false
 o.splitright = true
 o.list = true
 o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+vim.schedule(function ()
+    o.clipboard = "unnamedplus"
+end)
 
 o.foldmethod = "expr"
 o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
