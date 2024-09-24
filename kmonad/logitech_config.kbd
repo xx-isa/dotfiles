@@ -1,0 +1,15 @@
+(defcfg
+    input (device-file "/dev/input/by-id/usb-Logitech_USB_Receiver-if01-event-kbd")
+    output (uinput-sink "Teclado KMonad")
+    fallthrough true
+)
+
+(defsrc
+    caps
+)
+
+(defalias esctl (tap-hold 200 esc ctl))
+
+(deflayer default
+    @esctl
+)
