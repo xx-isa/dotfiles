@@ -1,6 +1,5 @@
 return {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
         local fzf = require("fzf-lua")
@@ -16,7 +15,9 @@ return {
         opts.desc = "Open config file"
         keymap.set("n", "Fc", function() fzf.files({cwd = "~/.config/nvim"}) end, opts)
         opts.desc = "Live grep project"
-        keymap.set("n", "Fg", fzf.live_grep, opts)
+        keymap.set("n", "Fg", function() fzf.live_grep({cmd = "rg -."}) end, opts)
+        opts.desc = "Visual grep project"
+        keymap.set("v", "Fg", function() fzf.grep_visual({cmd = "rg -."}) end, opts)
         opts.desc = "Resume FZF"
         keymap.set("n", "Fr", fzf.resume, opts)
         opts.desc = "Complete path"
