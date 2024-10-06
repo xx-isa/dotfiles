@@ -1,0 +1,148 @@
+@import "frappe.css";
+
+* {
+  font-size: 17px;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+
+window#waybar {
+  /*background-color: @base;*/
+  /*background-color: alpha(@base, 0.8);*/
+  /*background: linear-gradient(180deg, alpha(@blue, 0.3), alpha(@blue, 0));*/
+  background: transparent;
+  /*background: radial-gradient(closest-side at 20px 10px, @base, transparent);*/
+  /*background: linear-gradient(180deg, @base, alpha(@base, 0.8), alpha(@base, 0));*/
+  color: @text;
+  border-radius: 0;
+  border: none;
+}
+
+window#waybar.empty {
+    /*background: radial-gradient(linear-gradient(180deg, @base, alpha(@base, 0)), alpha(@base, 0));*/
+    background: radial-gradient(circle at top center, @base, alpha(@base, 0));
+}
+
+.modules-center, .modules-right {
+    background-color: @surface0;
+    border-radius: 15px;
+    padding: 0 15px;
+    margin-top: 3px;
+    /*padding-left: 40px;*/
+}
+.modules-left {
+    padding-left: 0;
+    padding-right: 15px;
+    background: transparent;
+    padding-top: 3px;
+}
+.modules-right {
+    padding-left: 15px;
+    padding-right: 0;
+    margin-right: 15px;
+}
+.modules-center {
+    padding: 0 15px;
+}
+
+label.module {
+    font-weight: bold;
+}
+
+#cpu,
+#memory,
+#disk,
+#network,
+#wireplumber,
+#tray,
+#idle_inhibitor,
+#power-profiles-daemon,
+#mpd {
+  padding: 0 10px;
+}
+
+#idle_inhibitor:hover,
+#pulseaudio:hover{
+    color: @mauve;
+}
+
+#pulseaudio {
+    padding: 0 10px;
+    margin: 0;
+}
+
+#window {
+    font-weight: normal;
+    background: transparent;
+}
+
+window#waybar.empty .modules-left,
+window#waybar.empty .modules-center,
+window#waybar.empty .modules-right {
+    background: transparent;
+}
+
+#keyboard-state {
+  margin: 0px;
+  min-width: 0px;
+  padding: 0;
+  color: @mauve;
+  font-weight: bold;
+}
+
+#keyboard-state > label {
+  padding: 0;
+  margin-right: 0px;
+}
+#keyboard-state > label.locked {
+  padding: 0 3px;
+  margin-right: 10px;
+}
+
+tooltip {
+  background-color: @surface0;
+  border: none;
+}
+
+button {
+  border: none;
+}
+
+#workspaces {
+  border: none;
+  margin: 0 15px;
+  background-color: transparent;
+  border-radius: 15px;
+  padding: 0 5px;
+  background: @surface0;
+}
+
+#workspaces button {
+  background-color: transparent;
+  color: @text;
+  border-color: transparent;
+  border-radius: 20px;
+  margin: 0 -7px;
+  padding: 0;
+  box-shadow: none;
+  transition-property: border-width, margin;
+  transition-duration: 250ms;
+}
+
+#workspaces > button:first-child:hover  {
+    margin-left: -7px;
+}
+
+#workspaces button.active {
+  color: @mauve;
+}
+
+#workspaces button:hover {
+  margin: 0 5px;
+  padding: 0;
+  text-shadow: none;
+}
+
+#language {
+  border-radius: 5px;
+}
