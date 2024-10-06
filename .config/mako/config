@@ -1,0 +1,25 @@
+font=Victor Mono Nerd Font 12
+
+text-color=#c6d0f5
+background-color=#414559ef
+
+width=325
+
+border-color=#ca9ee6
+border-radius=10
+border-size=3
+
+progress-color=source #8caaeedf
+
+format=<b>%a:\n%s</b>\n%b
+anchor=top-center
+
+padding=5,15,15
+outer-margin=15
+
+group-by=app-name
+
+default-timeout=6000
+
+[grouped]
+format=(%g) <b>%s</b>\n%b
