@@ -32,13 +32,14 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="30%"
 }
 
 layout {
     gaps 14
 
     center-focused-column "never"
+    always-center-single-column
 
     preset-column-widths {
         proportion 0.33333
@@ -48,10 +49,12 @@ layout {
 
     // preset-window-heights { }
 
+    default-column-width {}
 
-        // How many logical pixels the ring extends out from the windows.
+    focus-ring {
         width 3
         inactive-color "#414559"
+        active-gradient from="#ca9ee6" to="#eebebe" angle=180 relative-to="workspace-view"
     }
 
     border {
@@ -72,6 +75,10 @@ layout {
 spawn-at-startup "/usr/libexec/polkit-gnome-authentication-agent-1"
 
 prefer-no-csd
+
+environment {
+    DISPLAY ":0"
+}
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
