@@ -54,6 +54,10 @@ opts.desc = "Clear search results"
 keymap.set("n", "<leader><C-l>", [[ <Cmd>let @/=""<CR> ]], opts)
 opts.desc = "Toggle scrollbind"
 keymap.set("n", "<leader>scb", [[ <Cmd>windo set scrollbind!<CR> ]], opts)
+opts.desc = "Next buffer"
+keymap.set("n", "<Tab>", [[ <Cmd>bnext<CR> ]], opts)
+opts.desc = "Previous buffer"
+keymap.set("n", "<S-Tab>", [[ <Cmd>bprevious<CR> ]], opts)
 
 -- TOGGLE RELATIVE LINE NUMBER
 vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
