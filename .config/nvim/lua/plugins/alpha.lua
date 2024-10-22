@@ -20,6 +20,7 @@ return {
         }
         dashboard.section.buttons.val = {
             dashboard.button( "c", "  Config", "<Cmd>FzfLua files cwd=~/.config/nvim <CR>" ),
+            dashboard.button( "g", "  Neogit", "<Cmd>Neogit<CR>" ),
             dashboard.button( "e", "  New File", "<Cmd>ene<CR>"),
             dashboard.button( "o", "󰉋  Open File", "<Cmd>FzfLua files<CR>"),
         }
