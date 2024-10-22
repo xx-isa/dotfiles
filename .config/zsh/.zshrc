@@ -55,6 +55,7 @@ unalias zi
 eval "$(zoxide init zsh)"
 
 alias nivm="nvim"
+alias ngit='nvim -c "Neogit"'
 
 [ -f "/home/irmel/.ghcup/env" ] && . "/home/irmel/.ghcup/env" # ghcup-env
 
