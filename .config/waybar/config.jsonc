@@ -5,7 +5,7 @@
     "height": 25, // Waybar height (to be removed for auto height)
     "margin": "0",
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
         "niri/workspaces",
@@ -17,20 +17,25 @@
     ],
     // Modules configuration,
     "modules-right": [
+        "cpu",
+        "memory",
         "niri/language",
         "pulseaudio",
         "bluetooth",
         //"network",
-        //"cpu",
-        //"memory",
         "tray",
         "keyboard-state#caps",
-        "keyboard-state#num"
+        "keyboard-state#num",
         //"custom/power"
+        "custom/empty"
     ],
+    "custom/empty": {
+        "format": " "
+    },
     "bluetooth": {
         "format": "",
-        "tooltip-format": "{status}"
+        "tooltip-format": "{status}",
+        "on-click": "flatpak run io.github.kaii_lb.Overskride"
     },
     "niri/workspaces": {
         "format": "{icon}{name}",
@@ -50,6 +55,7 @@
             "(.*) — Mozilla Firefox": "󰈹   $1",
             "(.*) — Zen Browser": "   $1",
             "(.*) - Twitch (.*)": "   $1",
+            "(.*) - YouTube (.*)": "   $1",
             "tmux": "   tmux",
             "Steam": " ",
             "(.*) - Obsidian (.*)": "   $1"
@@ -89,11 +95,11 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}%  ",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}%  "
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
