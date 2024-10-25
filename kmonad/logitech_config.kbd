@@ -12,7 +12,7 @@
 )
 
 (defalias esctl (tap-hold 200 esc ctl))
-(defalias tapsuper (tap-next (cmd-button "niri msg action spawn -- fuzzel") lmet))
+(defalias tapsuper (tap-hold 200 (cmd-button "niri msg action spawn -- fuzzel") lmet))
 
 (deflayer default
     @esctl
