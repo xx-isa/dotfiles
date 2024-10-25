@@ -17,7 +17,15 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
+export FZF_DEFAULT_OPTS=" \
+--color=spinner:#f2d5cf,hl:#e78284 \
+--color=fg:#c6d0f5,header:#e78284,info:#ca9ee6,pointer:#f2d5cf \
+--color=marker:#babbf1,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284 \
+--color=selected-bg:#51576d \
+--layout reverse \
+--multi"
 
+source <(fzf --zsh)
 
 autoload -U compinit
 compinit -C
@@ -50,11 +58,11 @@ zinit ice has'eza' atinit'AUTOCD=1'
 zinit light z-shell/zsh-eza
 clear
 
-source <(fzf --zsh)
 unalias zi
 eval "$(zoxide init zsh)"
 
 alias nivm="nvim"
+alias Fvim='nvim $(fzf)'
 alias ngit='nvim -c "Neogit"'
 
 [ -f "/home/irmel/.ghcup/env" ] && . "/home/irmel/.ghcup/env" # ghcup-env
