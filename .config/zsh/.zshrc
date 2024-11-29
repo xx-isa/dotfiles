@@ -54,15 +54,20 @@ zinit light jeffreytse/zsh-vi-mode
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-syntax-highlighting
-zinit ice has'eza' atinit'AUTOCD=1'
+
+zinit ice has'eza' atinit'AUTOCD=1' silent
 zinit light z-shell/zsh-eza
-clear
+
+function zvm_after_init() {
+  zvm_bindkey viins "^R" fzf-history-widget
+}
 
 unalias zi
 eval "$(zoxide init zsh)"
 
 alias nivm="nvim"
-alias Fv='nvim $(fzf)'
+alias Fv='nvim $(fzf --preview="bat -p --color=always {}")'
+alias Fg="${ZDOTDIR}/Fg.sh"
 alias ngit='nvim -c "Neogit" -c "bd 1"'
 
 [ -f "/home/irmel/.ghcup/env" ] && . "/home/irmel/.ghcup/env" # ghcup-env

@@ -5,7 +5,6 @@
 
 setopt multios              # enable redirect to multiple streams: echo >file1 >file2
 setopt autocd
-setopt promptsubst
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
@@ -20,9 +19,6 @@ unsetopt flowcontrol
 setopt auto_menu         # show completion menu on successive tab press
 setopt complete_in_word
 setopt always_to_end
-
-## super user alias
-alias _='sudo '
 
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' special-dirs true
@@ -133,5 +129,6 @@ if [[ -z "$INSIDE_EMACS" || "$INSIDE_EMACS" = vterm ]]; then
 fi
 
 
+setopt promptsubst
 export PROMPT="%F{magenta}%n%f in %F{green}%~%f 
 %F{yellow}λ%f "
