@@ -66,7 +66,7 @@ unalias zi
 eval "$(zoxide init zsh)"
 
 alias nivm="nvim"
-alias Fv='fzf --preview="bat -p --color=always {}" --bind "enter:become(nvim {})"'
+alias Fv="${ZDOTDIR}/Fv.sh"
 alias Fg="${ZDOTDIR}/Fg.sh"
 alias ngit='nvim -c "Neogit" -c "bd 1"'
 
