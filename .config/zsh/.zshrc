@@ -46,6 +46,7 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
+zinit ice has 'fzf'
 zinit light Aloxaf/fzf-tab
 
 zinit ice depth=1
@@ -58,11 +59,11 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit ice has'eza' atinit'AUTOCD=1' atload'alias la="eza -a $eza_params"' silent
 zinit light z-shell/zsh-eza
 
-function zvm_after_init() {
+function zvm_after_init {
   zvm_bindkey viins "^R" fzf-history-widget
 }
 
-function Fv() {
+function Fv {
     fd --hidden --color=always --type f "${*:-}" |
         fzf \
         --ansi \
@@ -70,7 +71,7 @@ function Fv() {
         --bind "enter:become(nvim {})"
 }
 
-function Fg() {
+function Fg {
     rg --color=always --line-number --hidden --no-heading --smart-case "${*:-}" |
         fzf --ansi \
         --delimiter : \
